@@ -58,7 +58,7 @@ export default function Login({ onSubmit, onRegister }: Props) {
 
 const styles = StyleSheet.create({
   container: { padding: 24, width: "100%", maxWidth: 420 },
-  logoWrapper: { alignItems: "center", marginBottom: 12 },
+  logoWrapper: { alignItems: "center", marginBottom: 12, marginTop: -16 },
   title: { fontSize: 28, fontWeight: "700", marginBottom: 12 },
   input: {
     borderWidth: 1,
