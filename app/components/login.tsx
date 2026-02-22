@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Switch, Text, TextInput, View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import Logo from "./logo";
 
 type Props = {
@@ -12,6 +13,47 @@ export default function Login({ onSubmit, onRegister }: Props) {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
+  const InputField = ({
+    iconName,
+    placeholder,
+    value,
+    onChangeText,
+    secureTextEntry,
+    keyboardType,
+    autoCapitalize,
+  }: any) => {
+    const [focused, setFocused] = useState(false);
+    return (
+      <View style={styles.inputContainer}>
+        <View
+          style={[
+            styles.inputWrap,
+            focused && styles.inputWrapFocused,
+          ]}
+        >
+          <MaterialIcons
+            name={iconName}
+            size={20}
+            color={focused ? "#0033AA" : "#666"}
+            style={{ marginRight: 8 }}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder={placeholder}
+            value={value}
+            onChangeText={onChangeText}
+            secureTextEntry={secureTextEntry}
+            keyboardType={keyboardType}
+            autoCapitalize={autoCapitalize}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            placeholderTextColor="#aaa"
+          />
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoWrapper}>
@@ -19,8 +61,8 @@ export default function Login({ onSubmit, onRegister }: Props) {
       </View>
       <Text style={styles.title}>Sign In</Text>
 
-      <TextInput
-        style={styles.input}
+      <InputField
+        iconName="email"
         placeholder="Email"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -28,8 +70,8 @@ export default function Login({ onSubmit, onRegister }: Props) {
         onChangeText={setEmail}
       />
 
-      <TextInput
-        style={styles.input}
+      <InputField
+        iconName="lock"
         placeholder="Password"
         secureTextEntry
         value={password}
@@ -57,21 +99,27 @@ export default function Login({ onSubmit, onRegister }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 24, width: "100%", maxWidth: 420 },
+  container: { padding: 24, width: "100%", maxWidth: 500 },
   logoWrapper: { alignItems: "center", marginBottom: 12, marginTop: -16 },
   title: { fontSize: 28, fontWeight: "700", marginBottom: 12 },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    padding: 12,
+  inputContainer: { marginBottom: 12, height: 48, width: "100%", maxWidth: 500 },
+  inputWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#0033AA",
+    paddingHorizontal: 12,
     borderRadius: 8,
-    marginBottom: 12,
+    height: "100%",
+    width: "100%",
   },
+  inputWrapFocused: { borderColor: "#0033AA" },
+  input: { flex: 1, paddingVertical: 0, fontSize: 14 },
   row: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 18 },
   rememberRow: { flexDirection: "row", alignItems: "center" },
   rememberText: { marginLeft: 8 },
   register: { color: "#0066cc", fontWeight: "600" },
-  button: { backgroundColor: "#0033AA", padding: 14, borderRadius: 8, alignItems: "center" },
+  button: { backgroundColor: "#0033AA", padding: 14, borderRadius: 8, alignItems: "center", width: "100%", maxWidth: 500 },
   buttonPressed: { opacity: 0.85 },
   buttonText: { color: "#fff", fontWeight: "700" },
 });
