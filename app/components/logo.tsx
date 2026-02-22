@@ -3,7 +3,11 @@ import { Animated, StyleSheet, Text, View } from "react-native";
 
 const FULL = "ULibrary";
 
-export default function Logo() {
+type Props = {
+  onComplete?: () => void;
+};
+
+export default function Logo({ onComplete }: Props) {
   const [index, setIndex] = useState(0);
   const scale = useRef(new Animated.Value(0.95)).current;
   const opacity = useRef(new Animated.Value(0)).current;
@@ -17,15 +21,21 @@ export default function Logo() {
     ]).start();
 
     // typing effect
-    const t = setInterval(() => {
+    let t: number | undefined = undefined as unknown as number;
+    t = setInterval(() => {
       setIndex((i) => {
         if (i >= FULL.length) {
-          clearInterval(t);
+          if (t) clearInterval(t as unknown as number);
           return i;
         }
-        return i + 1;
+        const next = i + 1;
+        if (next === FULL.length) {
+          // small delay then notify completion
+          setTimeout(() => onComplete && onComplete(), 500);
+        }
+        return next;
       });
-    }, 120);
+    }, 120) as unknown as number;
 
     // blinking cursor
     Animated.loop(
@@ -35,8 +45,10 @@ export default function Logo() {
       ])
     ).start();
 
-    return () => clearInterval(t);
-  }, []);
+    return () => {
+      if (t) clearInterval(t as unknown as number);
+    };
+  }, [onComplete]);
 
   const showU = index >= 1 ? FULL.charAt(0) : "";
   const showLibrary = index >= 2 ? FULL.slice(1, index) : "";
