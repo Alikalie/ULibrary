@@ -1,7 +1,7 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import Login from "./components/login";
 import { useRouter } from "expo-router";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import Login from "./components/login";
 
 export default function LoginPage() {
   const router = useRouter();

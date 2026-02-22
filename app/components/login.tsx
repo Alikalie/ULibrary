@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable, Switch } from "react-native";
+import { Pressable, StyleSheet, Switch, Text, TextInput, View } from "react-native";
+import Logo from "./logo";
 
 type Props = {
   onSubmit?: (values: { email: string; password: string; remember: boolean }) => void;
@@ -13,6 +14,9 @@ export default function Login({ onSubmit, onRegister }: Props) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.logoWrapper}>
+        <Logo />
+      </View>
       <Text style={styles.title}>Sign In</Text>
 
       <TextInput
@@ -54,6 +58,7 @@ export default function Login({ onSubmit, onRegister }: Props) {
 
 const styles = StyleSheet.create({
   container: { padding: 24, width: "100%", maxWidth: 420 },
+  logoWrapper: { alignItems: "center", marginBottom: 12 },
   title: { fontSize: 28, fontWeight: "700", marginBottom: 12 },
   input: {
     borderWidth: 1,

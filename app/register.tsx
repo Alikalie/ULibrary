@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useRouter } from "expo-router";
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Register() {
   const router = useRouter();

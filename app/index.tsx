@@ -1,6 +1,6 @@
-import { View, StyleSheet } from "react-native";
-import Logo from "./components/logo";
 import { useRouter } from "expo-router";
+import { StyleSheet, View } from "react-native";
+import Logo from "./components/logo";
 
 export default function Index() {
   const router = useRouter();
