@@ -57,7 +57,7 @@ export default function Logo() {
 const styles = StyleSheet.create({
   wrapper: { justifyContent: "center", alignItems: "center" },
   inner: { alignItems: "center" },
-  base: { fontSize: 44, fontWeight: "800", letterSpacing: 0.5 },
+  base: { fontSize: 44, fontWeight: "800", letterSpacing: 0.5, fontFamily: "Century Gothic" },
   u: { color: "#0033AA" },
   library: { color: "#000000" },
   cursor: { color: "#000000", marginLeft: 4, fontWeight: "800" },
